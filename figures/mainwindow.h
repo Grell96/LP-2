@@ -9,9 +9,7 @@
 #include <QString>
 #include <QPoint>
 #include <QRectF>
-
 #include <iostream>
-
 #include "Figure.h"
 #include "Point.h"
 #include "Circle.h"
@@ -29,6 +27,7 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
+    void drawing();
 
 private slots:
 	void on_b_draw_circle_clicked();
