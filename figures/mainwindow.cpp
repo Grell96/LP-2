@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow)
@@ -25,54 +27,36 @@ MainWindow::~MainWindow()
         delete s;
 }
 
-void MainWindow::draw_circle(QPainter * painter)
+void MainWindow::drawing()
 {
-    shapes.push_back(new Circle("red",rand() % 100,rand() % 500,rand() % 400));
+    pixmap->fill();
     for(Figure * s:shapes)
-    {
-        s->draw(painter);
-    }
-
+         s->draw(painter);
+    ui->label_draw_area->setPixmap(*pixmap);
 }
+
 
 void MainWindow::on_b_draw_circle_clicked()
 {
-	pixmap->fill();
+    shapes.push_back(new Circle("red",rand() % 100,rand() % 500,rand() % 400));
 
-	draw_circle(painter);
-
-	ui->label_draw_area->setPixmap(*pixmap);
+    drawing();
 }
 
-void MainWindow::draw_square(QPainter * painter)
-{
-    shapes.push_back(new Square("yellow",rand() % 100,rand() % 500,rand() % 400));
-    for(Figure * s:shapes)
-        s->draw(painter);
-}
 void MainWindow::on_b_draw_square_clicked()
-{
-    pixmap->fill();
+{         
+    drawing();
 
-    draw_square(painter);
-
-    ui->label_draw_area->setPixmap(*pixmap);
+    shapes.push_back(new Square("yellow",rand() % 100,rand() % 500,rand() % 400));
 }
 
-void MainWindow::draw_triangle(QPainter * painter)
-{
-    shapes.push_back(new Triangle(rand() % 100,rand() % 500,rand() % 400));
-    for(Figure * s:shapes)
-        s->draw(painter);
-}
 
 void MainWindow::on_b_draw_triangle_clicked()
 {
-    pixmap->fill();
+    drawing();
 
-    draw_triangle(painter);
+    shapes.push_back(new Triangle(rand() % 100,rand() % 500,rand() % 400));
 
-    ui->label_draw_area->setPixmap(*pixmap);
 }
 
 void MainWindow::on_pushButton_clicked()
